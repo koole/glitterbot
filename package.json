@@ -1,0 +1,35 @@
+{
+  "name": "glitterbot",
+  "version": "1.0.0",
+  "description": "Improves team morale by posting Glitterplaatjes to Slack",
+  "main": "glitterbot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/appmantle/glitterbot.git"
+  },
+  "keywords": [
+    "glitterplaatje",
+    "slack",
+    "bot",
+    "glitter",
+    "productivity",
+    "morale"
+  ],
+  "author": "Appmantle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/appmantle/glitterbot/issues"
+  },
+  "homepage": "https://github.com/appmantle/glitterbot#readme",
+  "dependencies": {
+    "node-schedule": "^1.2.0",
+    "request": "^2.79.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.16.1",
+    "eslint-config-google": "^0.7.1"
+  }
+}
