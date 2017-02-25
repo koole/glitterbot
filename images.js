@@ -1,4 +1,5 @@
 const fs = require('fs');
+const md5File = require('md5-file');
 
 // Settings
 const imageFolder = './public/';
@@ -18,7 +19,7 @@ for (const subFolder of subFolders) {
         if(Object.keys(images).length == subFolders.length) {
 
             // Write the object to a file
-            fs.writeFile(imageFolder + outputFileName, JSON.stringify(images), (err) => {
+            fs.writeFile(imageFolder + outputFileName, JSON.stringify(images, null, 4), (err) => {
                 if (err) throw err;
 
                 // Notify the user we're done
@@ -37,6 +38,12 @@ function readdir(subFolder) {
 
                 // Images must match one of these extentions
                 if(file.match(/\.((?:gif|jpg|jpeg|png))(?:[\?#]|$)/i)) {
+
+                    // Get the MD5 sum of the image
+                    const hash = md5File.sync(`${imageFolder}${subFolder}/${file}`);
+                    fs.rename(`${imageFolder}${subFolder}/${file}`, `${imageFolder}${subFolder}/${hash}.${file.split('.').pop()}`, function(err) {
+                        if ( err ) console.log('ERROR: ' + err);
+                    });
 
                     // When the key in the global object doesn't exist yet,
                     // create it as a new array

@@ -17,7 +17,7 @@ This bot is written in JavaScript and requires Node.js to run.
 ### Setup
 1. Create a new coming webhook on slack and select the channel you want your Glitterplaatjes to be send to
 2. Clone Glitterbot to your own machine
-3. Install all (2) dependencies by running `npm install`
+3. Install all dependencies by running `npm install`
 3. Open `glitterbot.js` and set the URL of the webhook you just made in `SLACK_WEBHOOK_URL`
 4. Start the bot using `node glitterbot.js`
 
@@ -43,12 +43,7 @@ Setting | Usage
 1. Fork the repository on Github
 2. Clone the repo to your own machine
 3. Add your own Glitterplaatjes to the correct folders
-4. Make the name of the Glitterplaatje the MD5 hash of the file
-  This can be done by running a command like this in the folder you placed the image in:
-
-  **OSX**: ```md5 * | sed -e 's/MD5 (\([^.]*\)\(.[^)]*\)) = \(.*\)$/mv -v "\1\2" \3\2/' | sh```
-
-  **Linux**: ```md5sum * | sed -e 's/\([^ ]*\) \(.*\(\..*\)\)$/mv -v \2 \1\3/' | sh```
+4. Install dependencies by running `npm install`
 5. run `node images.js` to generate an updated `images.json` with your new Glitterplaatjes
 6. Commit these changes to your own branch
 7. Push your work back to your fork on GitHub

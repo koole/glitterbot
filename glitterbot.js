@@ -17,7 +17,7 @@ console.log('Started Glitterbot');
 // If users didn't set a Slack webhook URL, close the bot. 
 if(SLACK_WEBHOOK_URL === '') {
     console.log('Please add your Slack incoming webhook URL to index.js');
-    return;
+    process.exit(1);
 }
 
 schedule.scheduleJob(CRON, () => {
