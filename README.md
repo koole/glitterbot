@@ -9,6 +9,9 @@ Glitterbot is a free and open source [Slack](http://slack.com) bot. The bot impr
 >
 > _- Bert-Jan Verwer_
 
+### What Glitterbot looks like
+![Slack screenshot](example.png)
+
 ## Usage
 You can host the Glitterplaatjes on your own web server, or use the Appmantle Glitter CDN as the source for the images. The Glitter CDN will always be up-to-date allowing you and your team to receive the latest and greatest Glitterplaatjes.
 

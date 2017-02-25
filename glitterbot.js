@@ -1,5 +1,6 @@
 const request = require('request');
 const schedule = require('node-schedule');
+const program = require('commander');
 
 // The incoming webhook URL for your Slack team
 // This is the only value you NEED to change for this bot to work.
@@ -14,14 +15,24 @@ const CRON = '00 09 * * 1-5';
 
 console.log('Started Glitterbot');
 
+program
+  .version('0.0.1')
+  .option('-i, --instant', 'Run bot once without starting cronjob')
+  .parse(process.argv);
+
 // If users didn't set a Slack webhook URL, close the bot. 
-if(SLACK_WEBHOOK_URL === '') {
+if (SLACK_WEBHOOK_URL === '') {
     console.log('Please add your Slack incoming webhook URL to index.js');
     process.exit(1);
 }
 
-schedule.scheduleJob(CRON, () => {
+if (!program.instant) {
+    schedule.scheduleJob(CRON, sentGlitter());
+} else {
+    sentGlitter();
+}
 
+function sentGlitter() {
     // Get the list of images from the image source
     request(IMAGE_SOURCE + 'images.json', function (error, response, body) {
         if (!error && response.statusCode == 200) {
@@ -60,4 +71,4 @@ schedule.scheduleJob(CRON, () => {
             console.log('Error requesting images.json from ' + IMAGE_SOURCE);
         }
     });
-});
+}
