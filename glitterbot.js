@@ -2,10 +2,6 @@ const request = require('request');
 const schedule = require('node-schedule');
 const program = require('commander');
 
-// The incoming webhook URL for your Slack team
-// This is the only value you NEED to change for this bot to work.
-const SLACK_WEBHOOK_URL = '';
-
 // If you want to use your own server, change this to the place you host the gitterbot /public folder
 // This folder needs to include the images.json file
 const IMAGE_SOURCE = 'http://glitter.appmantle.com/';

@@ -1,5 +1,9 @@
-# Glitterbot ✨
+![Glitterbot Logo](logo.png)
+# Your teams daily source of motivation
+[![dependencies Status](https://david-dm.org/appmantle/glitterbot/status.svg)](https://david-dm.org/appmantle/glitterbot)
+![Code Climate](https://codeclimate.com/github/appmantle/glitterbot/badges/gpa.svg)
 ![License](https://img.shields.io/github/license/appmantle/glitterbot.svg)
+
 
 Glitterbot is a free and open source [Slack](http://slack.com) bot. The bot improves your team's productivity by boosting your teams morale each morning. Glitterbot accomplishes this morale boost by posting a new Glitterplaatje at the start of each day.
 
@@ -39,7 +43,7 @@ You can add these
 Flag | Usage
 --- | ---
 `--instant (-i)` | When using this flag, the bot will instantly send an image to your Slack without starting a Cronjob.
-`--webhook (-h) [webhook url]` | The URL of your incoming Slack webhook. You can configure these for in the [Slack App Directory](slack.com/apps/manage/custom-integrations)
+`--webhook (-h) [url]` | The URL of your incoming Slack webhook. You can configure these for in the [Slack App Directory](slack.com/apps/manage/custom-integrations)
 
 In glitterbot.js itself you can change these settings:
 
