@@ -5,7 +5,7 @@ Glitterbot is a free and open source [Slack](http://slack.com) bot. The bot impr
 
 ### After adopting Glitterbot, how much more productive is your team?
 
-> Glitterbot has greatly improved our teams morale. It makes our employees feel like their work has a higher purpose. Each new Glitterplaatje gives us a way to to recognize our team members for a job well done.
+> Glitterbot has greatly improved our teams morale. It makes our employees feel like their work has a higher purpose. Each new Glitterplaatje gives us a way to recognize our team members for a job well done.
 >
 > _- Bert-Jan Verwer_
 
@@ -21,8 +21,7 @@ This bot is written in JavaScript and requires Node.js to run.
 1. Create a new coming webhook on slack and select the channel you want your Glitterplaatjes to be send to
 2. Clone Glitterbot to your own machine
 3. Install all dependencies by running `npm install`
-3. Open `glitterbot.js` and set the URL of the webhook you just made in `SLACK_WEBHOOK_URL`
-4. Start the bot using `node glitterbot.js`
+4. Start the bot using `node glitterbot.js -webhook [URL]`, where `[URL] the incoming webhook you just made.
 
 
 ### Using your own images
@@ -35,11 +34,19 @@ If you don't like the Glitterplaatjes (What?!), Glitterbot can also send your te
 4. Change the path of the image host to your own server in `glitterbot.js`
 
 ### Configuration
-In glitterbot.js you can change these settings:
+You can add these 
+
+Flag | Usage
+--- | ---
+`--instant (-i)` | When using this flag, the bot will instantly send an image to your Slack without starting a Cronjob.
+`--webhook (-h) [webhook url]` | The URL of your incoming Slack webhook. You can configure these for in the [Slack App Directory](slack.com/apps/manage/custom-integrations)
+
+In glitterbot.js itself you can change these settings:
+
 Setting | Usage
-`SLACK_WEBHOOK_URL` | The URL of your incoming Slack webhook. You can configure these for in the [Slack App Directory](slack.com/apps/manage/custom-integrations)
+--- | ---
 `IMAGE_SOURCE` | The path to where images.json and all images are hosted. By default this is our Glitter CDN.
-`CRON` | The CRON expression used determine when Glitterplaatjes should be sent. By default this is on weekdays at 9:00. If you want to receive Glitterplaatjes every day, change this to `00 09 * * *`.
+`CRON` | The Cron expression used determine when Glitterplaatjes should be sent. By default this is on weekdays at 9:00. If you want to receive Glitterplaatjes every day, change this to `00 09 * * *`.
 
 ## Contributing
 ### Adding new Glitterplaatjes

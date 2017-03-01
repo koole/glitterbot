@@ -18,10 +18,11 @@ console.log('Started Glitterbot');
 program
   .version('0.0.1')
   .option('-i, --instant', 'Run bot once without starting cronjob')
+  .option('-h, --webhook', 'The incoming webhook for you Slack')
   .parse(process.argv);
 
 // If users didn't set a Slack webhook URL, close the bot. 
-if (SLACK_WEBHOOK_URL === '') {
+if (!program.webhook === '') {
     console.log('Please add your Slack incoming webhook URL to index.js');
     process.exit(1);
 }
@@ -34,7 +35,7 @@ if (!program.instant) {
 
 function sentGlitter() {
     // Get the list of images from the image source
-    request(IMAGE_SOURCE + 'images.json', function (error, response, body) {
+    request(`${IMAGE_SOURCE}images.json`, function (error, response, body) {
         if (!error && response.statusCode == 200) {
 
             // Parse image.json
@@ -53,10 +54,10 @@ function sentGlitter() {
 
             // Get a random image of the chosen image type
             let glitterImage = imageData[type][Math.floor(Math.random() * imageData[type].length)];
-            let glitterUrl = IMAGE_SOURCE + type + '/' + glitterImage;
+            let glitterUrl = `${IMAGE_SOURCE + type}/${glitterImage}`;
 
             // Sent image to Slack as Glitterbot
-            request.post(SLACK_WEBHOOK_URL, {
+            request.post(program.webhook, {
                 form: {
                     payload: JSON.stringify({
                         'icon_emoji': ':sparkles:',
@@ -68,7 +69,7 @@ function sentGlitter() {
 
             console.log('Sent image ' + glitterUrl);
         } else {
-            console.log('Error requesting images.json from ' + IMAGE_SOURCE);
+            console.log(`Error requesting images.json from ${IMAGE_SOURCE}`);
         }
     });
 }
