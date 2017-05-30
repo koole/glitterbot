@@ -14,7 +14,7 @@ Glitterbot is a free and open source [Slack](http://slack.com) bot. The bot impr
 >
 > _- [Bert-Jan Verwer](https://github.com/verwer)_
 
-> Glitterbot is polluting our chat
+> Glitterbot is polluting the chat
 >
 > _- [RainoBoy97](https://github.com/RainoBoy97)_
 
