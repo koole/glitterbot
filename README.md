@@ -18,6 +18,10 @@ Glitterbot is a free and open source [Slack](http://slack.com) bot. The bot impr
 >
 > _- [RainoBoy97](https://github.com/RainoBoy97)_
 
+> I love Glitterbot! Waking up every day and receiving my daily dose of motivation from Glitterbot always boosts my productivity 🤔🙏
+>
+> _- [Kailan Blanks](https://github.com/kailan)_
+
 ### What Glitterbot looks like
 ![Slack screenshot](example.png)
 
