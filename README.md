@@ -12,7 +12,11 @@ Glitterbot is a free and open source [Slack](http://slack.com) bot. The bot impr
 
 > Glitterbot has greatly improved our teams morale. It makes our employees feel like their work has a higher purpose. Each new Glitterplaatje gives us a way to recognize our team members for a job well done.
 >
-> _- Bert-Jan Verwer_
+> _- [Bert-Jan Verwer](https://github.com/verwer)_
+
+> Glitterbot is polluting our chat
+>
+> _- [RainoBoy97](https://github.com/RainoBoy97)_
 
 ### What Glitterbot looks like
 ![Slack screenshot](example.png)
