@@ -37,7 +37,7 @@ function readdir(subFolder) {
             files.forEach(file => {
 
                 // Images must match one of these extentions
-                if(file.match(/\.((?:gif|jpg|jpeg|png))(?:[\?#]|$)/i)) {
+                if(file.match(/\.((?:gif|jpg|jpeg|png))(?:[?#]|$)/i)) {
 
                     // Get the MD5 sum of the image
                     const hash = md5File.sync(`${imageFolder}${subFolder}/${file}`);
