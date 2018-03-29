@@ -1,10 +1,18 @@
-![Glitterbot Logo](logo.png)
-# Your teams daily source of motivation
+<div align="center">
+<img src="logo.png" width="185px">
+
+# Glitterbot
+
+### _Your teams daily source of motivation_
+
 [![dependencies Status](https://david-dm.org/appmantle/glitterbot/status.svg)](https://david-dm.org/appmantle/glitterbot)
 [![Code Climate](https://img.shields.io/codeclimate/issues/appmantle/glitterbot/mdf.svg)](https://codeclimate.com/github/appmantle/glitterbot)
 [![Code Climate](https://codeclimate.com/github/appmantle/glitterbot/badges/gpa.svg)](https://codeclimate.com/github/appmantle/glitterbot)
 ![License](https://img.shields.io/github/license/appmantle/glitterbot.svg)
 
+<br>
+<br>
+</div>
 
 Glitterbot is a free and open source [Slack](http://slack.com) bot. The bot improves your team's productivity by boosting your teams morale each morning. Glitterbot accomplishes this morale boost by posting a new Glitterplaatje at the start of each day.
 
