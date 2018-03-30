@@ -11,7 +11,7 @@ var webhookUrl = process.env.SLACK_WEBHOOK_URL;
 const IMAGE_SOURCE = 'http://glitter.appmantle.com/';
 
 // Default cronjob sends a new glitter every weekday at 9:00. 
-const CRON = '00 09 * * 1-5';
+const CRON = '00 9,14 * * 1-5';
 
 // If Slack webhook url not provided, exit gracefully.
 if (webhookUrl === '') {
