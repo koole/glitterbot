@@ -1,14 +1,8 @@
 const fs = require('fs');
 var getPixels = require('get-pixels')
 var GifEncoder = require('gif-encoder');
+const imgurUploader = require('imgur-uploader');
 const util = require('util');
-
-var jsdom;
-try {
-    jsdom = require("jsdom/lib/old-api.js"); // jsdom >= 10.x
-} catch (e) {
-    jsdom = require("jsdom"); // jsdom <= 9.x
-}
 
 const { convert } = require('convert-svg-to-jpeg');
 
@@ -19,82 +13,117 @@ async function svgToJpegFile(svgString, filename) {
     await writeFile(filename, jpeg);
 };
 
-const numberOfBars = 10;
+const numberOfBars = 15;
 const imageSize = 500;
+const types = ['vert', 'horiz', 'corner', 'burst'];
+const type = types[Math.floor(Math.random() * types.length)];
+var shape = 'rect';
+if (type === 'burst' && Math.random() < 0.5) shape = 'circle';
 
-jsdom.env(
-    "<html><body></body></html>", // CREATE DOM HOOK
-    ['http://d3js.org/d3.v3.min.js'], // JS DEPENDENCIES online 
+module.exports = async function(day) {
 
-    async function(err, window) {
-        var pics = [];
-        var colors = [];
+    var pics = [];
+    var colors = [];
+    var textColors = [];
+    var svgStrings = [];
+
+    for (var i = 0; i < numberOfBars; i++) {
+        colors.push("#000000".replace(/0/g, function() { return (~~(Math.random() * 16)).toString(16); }));
+    }
+
+    for (var i = 0; i < day.length; i++) {
+        textColors.push("#000000".replace(/0/g, function() { return (~~(Math.random() * 16)).toString(16); }));
+    }
+
+    for (var frame = 0; frame < numberOfBars; frame++) {
+        var svgString = `<svg width="${imageSize}" height="${imageSize}">`
+
         for (var i = 0; i < numberOfBars; i++) {
-            colors.push("#000000".replace(/0/g, function() { return (~~(Math.random() * 16)).toString(16); }));
-        }
-
-        for (var frame = 0; frame < numberOfBars; frame++) {
-            var svg = window.d3.select("body")
-                .append("svg")
-                .attr("width", imageSize)
-                .attr("height", imageSize);
-            for (var i = 0; i < numberOfBars; i++) {
-                svg.append("rect")
-                    .attr("id", "rect" + i)
-                    .attr("x", i * imageSize / numberOfBars)
-                    .attr("y", i * imageSize / numberOfBars)
-                    .attr("width", imageSize)
-                    .attr("height", imageSize)
-                    .style("fill", colors[(i + frame) % numberOfBars]);
+            var x = i * imageSize / numberOfBars;
+            if (type === 'horiz') x = 0;
+            if (type === 'burst') x /= 2;
+            var y = i * imageSize / numberOfBars;
+            if (type === 'vert') y = 0;
+            if (type === 'burst') y /= 2;
+            var width = imageSize;
+            if (type === 'burst') width *= (numberOfBars - i) / (numberOfBars);
+            var height = imageSize;
+            if (type === 'burst') height *= (numberOfBars - i) / (numberOfBars);
+            var fill = colors[(i + frame) % numberOfBars];
+            if (shape === 'rect') {
+                svgString += `<rect x=${x} y=${y} width="${width}" height="${height}" style="fill: ${fill};"></rect>`
+            } else {
+                svgString += `<circle cx="50%" cy="50%" r="${width/2}" style="fill: ${fill};"></circle>`
             }
-            svg.append("text")
-                .attr("font-family", "sans-serif")
-                .attr("font-size", Math.round(imageSize / numberOfBars) + "px")
-                .attr("x", "50%")
-                .attr("y", "50%")
-                .attr("alignment-baseline", "middle")
-                .attr("text-anchor", "middle")
-                .attr("fill", "white")
-                .text('Monday✨')
-
-            var svgString = window.d3.select("body").html();
-            svgString = svgString.slice(svgString.indexOf("<svg"));
-            // convert string to jpg file
-            await svgToJpegFile(svgString, `testing${frame}.jpg`);
-            // var imageAsBase64 = fs.readFileSync(`testing${frame}.jpg`, 'base64');
-            pics.push(`testing${frame}.jpg`)
-            console.log(window.d3.select("body").html())
-            window.d3.select("svg").remove();
-            console.log(window.d3.select("body").html())
-            // console.log("data:image/jpeg;base64," + imageAsBase64);
         }
 
-        var gif = new GifEncoder(imageSize, imageSize);
-        var file = fs.createWriteStream('img.gif');
+        const fontSize = Math.round(imageSize / 10) + "px";
+        const theta = 2 * Math.PI * frame / numberOfBars;
+        const textX = (5 * Math.cos(theta) + 50).toFixed(2);
+        const textY = (5 * Math.sin(theta) + 50).toFixed(2);
+        var dayText = '';
 
-        gif.pipe(file);
-        gif.setRepeat(0);
-        gif.setQuality(20);
-        gif.setDelay(100);
-        gif.writeHeader();
+        // Multicolored string
+        for (var i = 0; i < day.length; i++) {
+            const fill = textColors[(i + frame) % day.length];
+            const letter = day.charAt(i);
+            dayText += `<tspan style="fill:${fill};alignment-baseline:middle;text-anchor=middle">${letter}</tspan>`
+        }
 
+        svgString += `<text font-family="sans-serif" font-size="${fontSize}" x="${textX}%" y="${textY}%" alignment-baseline="middle" text-anchor="middle">✨${dayText}✨</text>`
+        const numberOfSparkles = 8 + Math.round(Math.random()*10);
+
+        for (var i = 0; i < numberOfSparkles; i++) {
+            const sparkleX = Math.round(Math.random()*imageSize);
+            const sparkleY = Math.round(Math.random()*imageSize);
+            const sparkleSize = 15 + Math.floor(Math.random()*8);
+            svgString += `<text font-family="sans-serif" font-size="${sparkleSize}px" x="${sparkleX}" y="${sparkleY}" alignment-baseline="middle" text-anchor="middle" fill="white">✨</text>`
+        }
+
+        svgString += '</svg>'
+        svgStrings.push(svgString);
+    }
+
+    var frameNumber = 0;
+    for (const s of svgStrings) {
+        await svgToJpegFile(s, `frame${frameNumber}.jpg`);
+        pics.push(`frame${frameNumber}.jpg`)
+        frameNumber++;
+    }
+
+    var gif = new GifEncoder(imageSize, imageSize);
+    var file = fs.createWriteStream('glitter.gif');
+
+    gif.pipe(file);
+    gif.setRepeat(0);
+    gif.setQuality(5);
+    gif.setDelay(100);
+    gif.writeHeader();
+
+    var renderGif = new Promise((resolve, reject) => {
         var addToGif = function(images, counter = 0) {
             getPixels(images[counter], function(err, pixels) {
+                if (err) reject(err);
                 gif.addFrame(pixels.data);
                 gif.read();
                 if (counter === images.length - 1) {
                     gif.finish();
+                    resolve();
                 } else {
                     addToGif(images, ++counter);
                 }
             })
         }
         addToGif(pics);
+    })
 
-        const imgurUploader = require('imgur-uploader');
-
-        // imgurUploader(fs.readFileSync('img.gif'), { title: 'Hello!' }).then(data => {
-        //     console.log(data);
-        // });
-    }
-);
+    return renderGif
+        .then(() => {
+            return new Promise((resolve, reject) => {
+                file.on('close', () => {
+                    resolve(imgurUploader(fs.readFileSync('glitter.gif'), { title: 'Hello!' }));
+                })
+            });
+        })
+        .then(data => data.link);
+};
