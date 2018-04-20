@@ -42,7 +42,7 @@ This bot is written in JavaScript and requires Node.js to run.
 1. Create a new coming webhook on slack and select the channel you want your Glitterplaatjes to be send to
 2. Clone Glitterbot to your own machine
 3. Install all dependencies by running `npm install`
-4. Start the bot using `node glitterbot.js -webhook [URL]`, where `[URL] the incoming webhook you just made.
+4. Start the bot using `node glitterbot.js --webhook [URL]`, where `[URL] the incoming webhook you just made.
 
 
 ### Using your own images
@@ -59,15 +59,11 @@ You can add these
 
 Flag | Usage
 --- | ---
-`--instant (-i)` | When using this flag, the bot will instantly send an image to your Slack without starting a Cronjob.
-`--webhook (-h) [url]` | The URL of your incoming Slack webhook. You can configure these for in the [Slack App Directory](slack.com/apps/manage/custom-integrations)
-
-In glitterbot.js itself you can change these settings:
-
-Setting | Usage
---- | ---
-`IMAGE_SOURCE` | The path to where images.json and all images are hosted. By default this is our Glitter CDN.
-`CRON` | The Cron expression used determine when Glitterplaatjes should be sent. By default this is on weekdays at 9:00. If you want to receive Glitterplaatjes every day, change this to `00 09 * * *`.
+`-w, --webhook <url>` | Required: The URL of your incoming Slack webhook. You can configure these for in the [Slack App Directory](slack.com/apps/manage/custom-integrations)
+`-i, --instant` | When using this flag, the bot will instantly send an image to your Slack without starting a Cronjob.
+`-c, --cron [cron]` | CRON string used for scheduling messages (default: 00 09 * * 1-5)
+`-s, --source [url]` | The path to where images.json and all images are hosted. By default this is our Glitter CDN.
+`-h, --help` | Output usage information
 
 ## Contributing
 ### Adding new Glitterplaatjes
