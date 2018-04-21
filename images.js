@@ -2,6 +2,9 @@ const fs = require("fs");
 const util = require("util");
 const md5File = require("md5-file");
 
+// Set this to true if you want to remove all images larger than 2MB
+const removeBig = false;
+
 // Settings
 const imageFolder = "./public";
 const folders = ["generic", "mon", "tue", "wed", "thu", "fri", "sat", "sun"];
@@ -19,6 +22,16 @@ for (const folder of folders) {
       const name = `${path}/${hash}.${file.split(".").pop()}`;
       fs.renameSync(`${path}/${file}`, name);
       images.push(name);
+
+      // Check for filesize, see issue #1
+      const {size} = fs.statSync(`${name}`);
+      if(size > 2000000) {
+        console.log(`Warning! Size of ${name} is too large!`)
+        if(removeBig) {
+          console.log("File removed")
+          fs.unlinkSync(name)
+        }
+      }
     }
   }
   data[folder] = images;
