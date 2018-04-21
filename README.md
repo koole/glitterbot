@@ -42,17 +42,17 @@ This bot is written in JavaScript and requires Node.js to run.
 1. Create a new coming webhook on slack and select the channel you want your Glitterplaatjes to be send to
 2. Clone Glitterbot to your own machine
 3. Install all dependencies by running `npm install`
-4. Start the bot using `node glitterbot.js --webhook [URL]`, where `[URL] the incoming webhook you just made.
+4. Start the bot using `node glitterbot.js --webhook [URL]`, where `[URL]` the incoming webhook you just made.
 
 
 ### Using your own images
 If you don't like the Glitterplaatjes (What?!), Glitterbot can also send your team your own custom images. 
 
 1. Replace the images in the `public` folder with your own images.
-  **Make sure to maintain the excisting folder structure.** Place images meant for specific days in the folders for these days (`public/mon` for monday, `public/tue` for tuesday). Place generic images that could be sent on any morning in the `public/generic` folder. Images should not be larger than 2MB, otherwise they won't automatically expand in Slack. To automatically remove bigger images, set `removeBig` to `true` in `images.js`.
+  **Make sure to maintain the existing folder structure.** Place images meant for specific days in the folders for these days (`public/mon` for monday, `public/tue` for tuesday). Place generic images that could be sent on any morning in the `public/generic` folder. Images should not be larger than 2MB, otherwise they won't automatically expand in Slack. To automatically remove bigger images, set `removeBig` to `true` in `images.js`.
 2. Run `node images.js` to generate a new `images.json` for your images.
 3. Upload the images.json file and all images to your own server.
-4. Change the path of the image host to your own server in `glitterbot.js`.
+4. Change the source of the image host to your own server using the `--source` option.
 
 ### Configuration
 You can add these options when running Glitterbot to change settings.
