@@ -19,12 +19,12 @@ for (const folder of folders) {
     if (file.match(/\.((?:gif|jpg|jpeg|png))(?:[\?#]|$)/i)) {
       const path = `${imageFolder}/${folder}`;
       const hash = md5File.sync(`${path}/${file}`);
-      const name = `${path}/${hash}.${file.split(".").pop()}`;
-      fs.renameSync(`${path}/${file}`, name);
+      const name = `${hash}.${file.split(".").pop()}`;
+      fs.renameSync(`${path}/${file}`, `${path}/${name}`);
       images.push(name);
 
       // Check for filesize, see issue #1
-      const {size} = fs.statSync(`${name}`);
+      const {size} = fs.statSync(`${path}/${name}`);
       if(size > 2000000) {
         console.log(`Warning! Size of ${name} is too large!`)
         if(removeBig) {
