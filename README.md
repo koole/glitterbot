@@ -55,9 +55,9 @@ If you don't like the Glitterplaatjes (What?!), Glitterbot can also send your te
 4. Change the path of the image host to your own server in `glitterbot.js`.
 
 ### Configuration
-You can add these 
+You can add these options when running Glitterbot to change settings.
 
-Flag | Usage
+Option | Usage
 --- | ---
 `-w, --webhook <url>` | Required: The URL of your incoming Slack webhook. You can configure these for in the [Slack App Directory](slack.com/apps/manage/custom-integrations)
 `-i, --instant` | When using this flag, the bot will instantly send an image to your Slack without starting a Cronjob.
