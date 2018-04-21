@@ -1,61 +1,30 @@
-const fs = require('fs');
-const md5File = require('md5-file');
+const fs = require("fs");
+const util = require("util");
+const md5File = require("md5-file");
 
 // Settings
-const imageFolder = './public/';
-const subFolders = ['generic', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-const outputFileName = 'images.json';
+const imageFolder = "./public";
+const folders = ["generic", "mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+const fileName = "images.json";
 
-// Object we're going to fill
-let images = {};
+const data = {};
 
-// Foreach all subfolders
-for (const subFolder of subFolders) {
-
-    // This will add the images to the global object
-    readdir(subFolder).then(images => {
-
-        // If the keys are equal to the given subfolders, we're done.
-        if(Object.keys(images).length == subFolders.length) {
-
-            // Write the object to a file
-            fs.writeFile(imageFolder + outputFileName, JSON.stringify(images, null, 4), (err) => {
-                if (err) throw err;
-
-                // Notify the user we're done
-                console.log('images.json saved');
-            });
-        }
-    });
+for (const folder of folders) {
+  let images = [];
+  const files = fs.readdirSync(`${imageFolder}/${folder}`);
+  for (const file of files) {
+    if (file.match(/\.((?:gif|jpg|jpeg|png))(?:[\?#]|$)/i)) {
+      const path = `${imageFolder}/${folder}`;
+      const hash = md5File.sync(`${path}/${file}`);
+      const name = `${path}/${hash}.${file.split(".").pop()}`;
+      fs.renameSync(`${path}/${file}`, name);
+      images.push(name);
+    }
+  }
+  data[folder] = images;
 }
 
-function readdir(subFolder) {
-    return new Promise(resolve => {
-
-        // Read the subfolder
-        fs.readdir(`${imageFolder}${subFolder}`, (err, files) => {
-            files.forEach(file => {
-
-                // Images must match one of these extentions
-                if(file.match(/\.((?:gif|jpg|jpeg|png))(?:[\?#]|$)/i)) {
-
-                    // Get the MD5 sum of the image
-                    const hash = md5File.sync(`${imageFolder}${subFolder}/${file}`);
-                    fs.rename(`${imageFolder}${subFolder}/${file}`, `${imageFolder}${subFolder}/${hash}.${file.split('.').pop()}`, function(err) {
-                        if ( err ) console.log('ERROR: ' + err);
-                    });
-
-                    // When the key in the global object doesn't exist yet,
-                    // create it as a new array
-                    images[subFolder] = images[subFolder] || [];
-
-                    // Add image to given key
-                    images[subFolder].push(file);
-                }
-            });
-
-            // Resolve with the image object
-            resolve(images);
-        });
-    });
-}
+fs.writeFile(`${imageFolder}/${fileName}`, JSON.stringify(data), err => {
+  if (err) throw err;
+  console.log("images.json saved");
+});
