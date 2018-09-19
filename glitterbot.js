@@ -37,23 +37,40 @@ if (!program.instant) {
   sendGlitter();
 }
 
+// Returns a random number between 0 and 1
+function artificialIntelligence() {
+  return Math.random();
+}
+
+// Choose if a generic image or a day specific image should be sent.
+// There's a 25% chance a generic image gets chosen.
+function blockChain() {
+  if (artificialIntelligence() > 0.75) {
+    return "generic";
+  } else {
+    const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    return days[new Date().getDay()];
+  }
+}
+
+// Fetch the list of all images, and then select a
+// random image of the previously chosen image type.
+function machineLearning(folder, data) {
+  const images = data[folder];
+  const image = images[Math.floor(artificialIntelligence() * images.length)];
+  return `${program.source}/${folder}/${image}`;
+}
+
 async function sendGlitter() {
   try {
-    // Choose if a generic image or a day specific image should be sent.
-    // There's a 25% chance a generic image gets chosen.
-    if (Math.random() > 0.75) {
-      var folder = "generic";
-    } else {
-      const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-      var folder = days[new Date().getDay()];
-    }
+    // Select a folder with images from the blockchain
+    // using artificial intelligence.
+    const folder = blockChain();
 
-    // Fetch the list of all images, and then select a
-    // random image of the previously chosen image type.
+    // Then, using machine learning, get the url for a
+    // specific glitterplaatje.
     const { data } = await axios.get(`${program.source}/images.json`);
-    const images = data[folder];
-    const image = images[Math.floor(Math.random() * images.length)];
-    const url = `${program.source}/${folder}/${image}`;
+    const url = machineLearning(folder, data);
 
     // Sent image url to Slack
     postMessage(url);

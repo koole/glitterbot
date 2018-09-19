@@ -1,5 +1,5 @@
 <div align="center">
-<img src="logo.png" width="185px">
+<img src="https://glitterbot.appmantle.com/logo.png" width="256px">
 
 # Glitterbot
 
@@ -22,9 +22,9 @@ Glitterbot is a free and open source [Slack](http://slack.com) bot. The bot impr
 >
 > _- [Bert-Jan Verwer](https://github.com/verwer)_
 
-> Glitterbot is polluting the chat
+> Glitterbot is polluting the chat.
 >
-> _- [RainoBoy97](https://github.com/RainoBoy97)_
+> _- [Ryan Warsaw](https://github.com/ryanwarsaw)_
 
 > I love Glitterbot! Waking up every day and receiving my daily dose of motivation from Glitterbot always boosts my productivity 🤔🙏
 >
