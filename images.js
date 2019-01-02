@@ -7,7 +7,22 @@ const removeBig = false;
 
 // Settings
 const imageFolder = "./public";
-const folders = ["generic", "mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+const folders = [
+  "generic",
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "sat",
+  "sun",
+  "new-year",
+  "easter",
+  "liberation",
+  "valentine",
+  "halloween",
+  "christmas"
+];
 const fileName = "images.json";
 
 const data = {};
@@ -24,12 +39,12 @@ for (const folder of folders) {
       images.push(name);
 
       // Check for filesize, see issue #1
-      const {size} = fs.statSync(`${path}/${name}`);
-      if(size > 2000000) {
-        console.log(`Warning! Size of ${name} is too large!`)
-        if(removeBig) {
-          console.log("File removed")
-          fs.unlinkSync(name)
+      const { size } = fs.statSync(`${path}/${name}`);
+      if (size > 2000000) {
+        console.log(`Warning! Size of ${name} is too large!`);
+        if (removeBig) {
+          console.log("File removed");
+          fs.unlinkSync(name);
         }
       }
     }

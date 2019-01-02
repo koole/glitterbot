@@ -45,12 +45,31 @@ function artificialIntelligence() {
 // Choose if a generic image or a day specific image should be sent.
 // There's a 25% chance a generic image gets chosen.
 function blockChain() {
+  const d = new Date();
+  // const today = `${d.getDate()}-${d.getMonth() + 1}`;
+  const today = "14-2"
+
+  const holidays = {
+    "1-1": "new-year",
+    "14-2": "valentine",
+    "5-5": "liberation",
+    "31-10": "halloween",
+    "25-12": "christmas",
+    "26-12": "christmas"
+  };
+  // Set easter dynamically
+  holidays[getEaster()] = "easter"
+
+  if (today in holidays) {
+    return holidays[today]
+  }
+
   if (artificialIntelligence() > 0.75) {
     return "generic";
-  } else {
-    const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-    return days[new Date().getDay()];
   }
+
+  const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+  return days[new Date().getDay()];
 }
 
 // Fetch the list of all images, and then select a
@@ -93,4 +112,24 @@ async function postMessage(text) {
     if (program.debug) console.log(error);
     console.log("Error sending message to Slack webhook");
   }
+}
+
+function getEaster() {
+  const year = new Date().getYear();
+  var f = Math.floor,
+    // Golden Number - 1
+    G = year % 19,
+    C = f(year / 100),
+    // related to Epact
+    H = (C - f(C / 4) - f((8 * C + 13) / 25) + 19 * G + 15) % 30,
+    // number of days from 21 March to the Paschal full moon
+    I = H - f(H / 28) * (1 - f(29 / (H + 1)) * f((21 - G) / 11)),
+    // weekday for the Paschal full moon
+    J = (year + f(year / 4) + I + 2 - C + f(C / 4)) % 7,
+    // number of days from 21 March to the Sunday on or before the Paschal full moon
+    L = I - J,
+    month = 3 + f((L + 40) / 44),
+    day = L + 28 - 31 * f(month / 4);
+
+  return `${day}-${month}`;
 }
