@@ -46,8 +46,7 @@ function artificialIntelligence() {
 // There's a 25% chance a generic image gets chosen.
 function blockChain() {
   const d = new Date();
-  // const today = `${d.getDate()}-${d.getMonth() + 1}`;
-  const today = "14-2"
+  const today = `${d.getDate()}-${d.getMonth() + 1}`;
 
   const holidays = {
     "1-1": "new-year",

@@ -1,6 +1,6 @@
 {
   "name": "glitterbot",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Improves team morale by posting Glitterplaatjes to Slack",
   "main": "glitterbot.js",
   "scripts": {
@@ -27,7 +27,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "commander": "^2.9.0",
-    "md5-file": "^3.1.1",
+    "md5-file": "^4.0.0",
     "node-schedule": "^1.2.0"
   }
 }
