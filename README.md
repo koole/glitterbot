@@ -6,7 +6,7 @@
 ### _Your teams daily source of motivation_
 
 [![dependencies Status](https://david-dm.org/appmantle/glitterbot/status.svg)](https://david-dm.org/appmantle/glitterbot)
-[![Code Climate](https://img.shields.io/codeclimate/issues/appmantle/glitterbot/mdf.svg)](https://codeclimate.com/github/appmantle/glitterbot)
+[![Code Climate](https://img.shields.io/codeclimate/issues/appmantle/glitterbot.svg)](https://codeclimate.com/github/appmantle/glitterbot)
 [![Code Climate](https://codeclimate.com/github/appmantle/glitterbot/badges/gpa.svg)](https://codeclimate.com/github/appmantle/glitterbot)
 ![License](https://img.shields.io/github/license/appmantle/glitterbot.svg)
 
