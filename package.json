@@ -27,6 +27,7 @@
   "dependencies": {
     "axios": "^0.18.1",
     "commander": "^2.9.0",
+    "crc": "^3.8.0",
     "jimp": "^0.6.4",
     "md5-file": "^4.0.0",
     "node-schedule": "^1.2.0",

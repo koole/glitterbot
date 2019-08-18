@@ -289,7 +289,7 @@ buffer-equal@0.0.1:
   resolved "https://registry.yarnpkg.com/buffer-equal/-/buffer-equal-0.0.1.tgz#91bc74b11ea405bc916bc6aa908faafa5b4aac4b"
   integrity sha1-kbx0sR6kBbyRa8aqkI+q+ltKrEs=
 
-buffer@^5.2.0:
+buffer@^5.1.0, buffer@^5.2.0:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/buffer/-/buffer-5.4.0.tgz#33294f5c1f26e08461e528b69fa06de3c45cbd8c"
   integrity sha512-Xpgy0IwHK2N01ncykXTy6FpCWuM+CJSHoPVBLyNqyrWxsedpLvwsYUhf0ME3WRFNUhos0dMamz9cOS/xRDtU5g==
@@ -305,6 +305,13 @@ core-js@^2.5.7, core-js@^2.6.5:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.9.tgz#6b4b214620c834152e179323727fc19741b084f2"
   integrity sha512-HOpZf6eXmnl7la+cUdMnLvUxKNqLUzJvgIziQ0DiF3JwSImNphIqdGqzj6hIKyX04MmV0poclQ7+wjWvxQyR2A==
+
+crc@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/crc/-/crc-3.8.0.tgz#ad60269c2c856f8c299e2c4cc0de4556914056c6"
+  integrity sha512-iX3mfgcTMIq3ZKLIsVFAbv7+Mc10kxabAGQb8HvjA1o3T1PIYprbakQ65d3I+2HGHt6nSKkM9PYjgoJO2KcFBQ==
+  dependencies:
+    buffer "^5.1.0"
 
 cron-parser@^2.4.0:
   version "2.5.0"
