@@ -50,11 +50,9 @@ This bot is written in JavaScript and requires Node.js to run.
 ### Using your own images
 If you don't like the Glitterplaatjes (What?!), Glitterbot can also send your team your own custom images. 
 
-1. Replace the images in the `public` folder with your own images.
-  **Make sure to maintain the existing folder structure.** Place images meant for specific days in the folders for these days (`public/mon` for monday, `public/tue` for tuesday). Place generic images that could be sent on any morning in the `public/generic` folder. Images should not be larger than 2MB, otherwise they won't automatically expand in Slack. To automatically remove bigger images, set `removeBig` to `true` in `images.js`.
-2. Run `node images.js` to generate a new `images.json` for your images.
-3. Upload the images.json file and all images to your own server.
-4. Change the source of the image host to your own server using the `--source` option.
+1. Follow the instructions in the [koole/glittercdn](https://github.com/koole/glittercdn) repository.
+
+2. Change the source of the image host to your new host using the `--source` option.
 
 ### Configuration
 You can add these options when running Glitterbot to change settings.
@@ -69,14 +67,7 @@ Option | Usage
 
 ## Contributing
 ### Adding new Glitterplaatjes
-1. Fork the repository on Github.
-2. Clone the repo to your own machine.
-3. Add your own Glitterplaatjes to the correct folders. Images should not be larger than 2MB, otherwise they won't automatically expand in Slack. To automatically remove bigger images, set `removeBig` to `true` in `images.js`.
-4. Install dependencies by running `npm install`.
-5. run `node images.js` to generate an updated `images.json` with your new Glitterplaatjes.
-6. Commit these changes to your own branch.
-7. Push your work back to your fork on GitHub.
-8. Submit a pull request to our repository.
+To add new Glitterplaatjes follow the instructions in the [koole/glittercdn](https://github.com/koole/glittercdn) repository.
 
 ### Improving code
 At Appmantle, we're always open to outside contributions to our projects. If you've ran into a bug or have found any code or documentation to improve, feel free to make a pull request with a bugfix or other improvements. If you don't know how to fix a bug yourself, just open a new issue and we'll try to fix it.

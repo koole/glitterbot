@@ -17,7 +17,7 @@ program
   .option(
     "-s, --source [url]",
     "The path to where images.json and all images are hosted",
-    "https://glitter.appmantle.com"
+    "https://super.vette.website"
   )
   .option("-d, --debug", "Log complete axios error messages")
   .parse(process.argv);
@@ -76,7 +76,7 @@ function blockChain() {
 function machineLearning(folder, data) {
   const images = data[folder];
   const image = images[Math.floor(artificialIntelligence() * images.length)];
-  return `${program.source}/${folder}/${image}`;
+  return `${program.source}/${image}`;
 }
 
 async function sendGlitter() {
